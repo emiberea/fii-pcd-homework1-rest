@@ -4,28 +4,7 @@
 
 {% block fos_user_content %}
     <div class="row">
-        <div class="col-md-3">
-            {% if user.googlePictureLink %}
-                <img src="{{ user.googlePictureLink }}" alt="Google profile picture" class="img-responsive img-rounded" />
-            {% elseif user.facebookPictureLink %}
-                <img src="{{ user.facebookPictureLink }}" alt="Facebook profile picture" class="img-responsive img-rounded" />
-            {% else %}
-                <img src="{{ asset('bundles/ebride/images/profile_default.jpg') }}" alt="Facebook profile picture" class="img-responsive img-rounded" />
-            {% endif %}
-            <h3>{{ user.firstname }} {{ user.lastname }}</h3>
-            <h5>
-                <a href="{{ path('eb_user_public_profile', {'username': user.username}) }}">
-                    {{ user.username }}
-                </a>
-            </h5>
-            {% if app.user != user %}
-                {% set friend_action = get_friend_action(app.user, user) %}
-                <a href="{{ friend_action.route }}" id="friend-action" class="btn {{ friend_action.btn_style }}">
-                    {{ friend_action.text }}
-                </a>
-            {% endif %}
-        </div>
-        <div class="col-md-5">
+        <div class="col-md-5 col-md-offset-3">
             <div class="panel panel-default">
                 <div class="panel-heading">Personal data</div>
                 <table class="table table-hover">
@@ -44,26 +23,8 @@
                         <td>{{ user.address }}</td>
                     </tr>
                     <tr>
-                        <th>Gender</th>
-                        <td>{{ user.gender }}</td>
-                    </tr>
-                    <tr>
                         <th>Work / Occupation</th>
                         <td>{{ user.work }}</td>
-                    </tr>
-                    <tr>
-                        <th>Is smoker</th>
-                        <td>
-                            {% if user.isSmoker %}
-                                <span class="glyphicon glyphicon-ok"></span> Yes
-                            {% else %}
-                                <span class="glyphicon glyphicon-remove"></span> No
-                            {% endif %}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Favorite music</th>
-                        <td>{{ user.favoriteMusic }}</td>
                     </tr>
                     <tr>
                         <th>Hobbies</th>
@@ -76,71 +37,6 @@
                     </tbody>
                 </table>
             </div>
-            <div class="panel panel-default">
-                <div class="panel-heading">Driving skills</div>
-                <table class="table table-hover">
-                    <thead></thead>
-                    <tbody>
-                    <tr>
-                        <th>Is driver</th>
-                        <td>
-                            {% if user.isDriver %}
-                                <span class="glyphicon glyphicon-ok"></span> Yes
-                            {% else %}
-                                <span class="glyphicon glyphicon-remove"></span> No
-                            {% endif %}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Driving Licence Date</th>
-                        <td>{{ user.drivingLicenceDate is empty ? "-" : user.drivingLicenceDate|date('d-m-Y') }}</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
         </div>
     </div>
 {% endblock fos_user_content %}
-
-{% block javascripts %}
-    {{ parent() }}
-    <script type="text/javascript">
-        $(function() {
-            $("#friend-action").click(function(e) {
-                e.preventDefault();
-                var that = $(this);
-
-                $.get($(this).attr('href'), function(data) {
-                    if (data == "sent-ok" || data == "resend-ok") {
-                        that.removeClass("btn-default");
-                        that.addClass("btn-warning");
-                        that.text("+1 Friend Request Sent");
-                        that.attr("href", "#");
-                    } else if (data == "accept-ok") {
-                        that.removeClass("btn-warning");
-                        that.addClass("btn-success");
-                        that.text("Friends");
-                        that.attr("href", "#");
-                    } else if (data == "reject-ok") {
-                        that.unbind("mouseenter");
-                        that.unbind("mouseleave");
-                        that.removeClass("btn-danger");
-                        that.removeClass("friend-remove");
-                        that.addClass("btn-info");
-                        that.text("Unfriended");
-                        that.attr("href", "#");
-                    }
-                });
-            });
-            $(".friend-remove").hover(function() {
-                $(this).removeClass("btn-success");
-                $(this).addClass("btn-danger");
-                $(this).text("Unfriend");
-            }, function() {
-                $(this).removeClass("btn-danger");
-                $(this).addClass("btn-success");
-                $(this).text("Friends");
-            });
-        });
-    </script>
-{% endblock %}

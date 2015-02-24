@@ -1,0 +1,51 @@
+{% extends '::base.html.twig' %}
+
+{% block content -%}
+    <h1>Customer list</h1>
+
+    <table class="records_list">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Firstname</th>
+                <th>Lastname</th>
+                <th>City</th>
+                <th>Address</th>
+                <th>Phone</th>
+                <th>Birthdate</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('customer_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.firstname }}</td>
+                <td>{{ entity.lastname }}</td>
+                <td>{{ entity.city }}</td>
+                <td>{{ entity.address }}</td>
+                <td>{{ entity.phone }}</td>
+                <td>{% if entity.birthDate %}{{ entity.birthDate|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('customer_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('customer_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        <ul>
+        <li>
+            <a href="{{ path('customer_new') }}">
+                Create a new entry
+            </a>
+        </li>
+    </ul>
+    {% endblock %}

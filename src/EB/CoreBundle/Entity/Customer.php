@@ -1,21 +1,19 @@
 <?php
 
-namespace EB\UserBundle\Entity;
+namespace EB\CoreBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use FOS\UserBundle\Model\User as BaseUser;
 use JMS\Serializer\Annotation as JmsSerializer;
-use EB\CoreBundle\Entity\Shop;
 
 /**
- * User
+ * Customer
  *
- * @ORM\Table(name="eb_user")
- * @ORM\Entity(repositoryClass="EB\UserBundle\Repository\UserRepository")
+ * @ORM\Table(name="customers")
+ * @ORM\Entity(repositoryClass="EB\CoreBundle\Repository\CustomerRepository")
  * @JmsSerializer\ExclusionPolicy("all")
  */
-class User extends BaseUser
+class Customer
 {
     /**
      * @var integer
@@ -25,7 +23,7 @@ class User extends BaseUser
      * @ORM\GeneratedValue(strategy="AUTO")
      * @JmsSerializer\Expose
      */
-    protected $id;
+    private $id;
 
     /**
      * @var string
@@ -75,38 +73,16 @@ class User extends BaseUser
     private $birthDate;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="work", type="string", length=255, nullable=true)
-     */
-    private $work;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="hobbies", type="string", length=255, nullable=true)
-     */
-    private $hobbies;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="personalDescription", type="string", length=255, nullable=true)
-     */
-    private $personalDescription;
-
-    /**
      * @var ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="EB\CoreBundle\Entity\Shop", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="Order", mappedBy="customer")
      */
-    private $shops;
+    private $orders;
 
 
     public function __construct()
     {
-        parent::__construct();
-        $this->shops = new ArrayCollection();
+        $this->orders = new ArrayCollection();
     }
 
     public function __toString()
@@ -126,8 +102,10 @@ class User extends BaseUser
     }
 
     /**
+     * Set firstname
+     *
      * @param string $firstname
-     * @return User
+     * @return Customer
      */
     public function setFirstname($firstname)
     {
@@ -137,6 +115,8 @@ class User extends BaseUser
     }
 
     /**
+     * Get firstname
+     *
      * @return string 
      */
     public function getFirstname()
@@ -145,8 +125,10 @@ class User extends BaseUser
     }
 
     /**
+     * Set lastname
+     *
      * @param string $lastname
-     * @return User
+     * @return Customer
      */
     public function setLastname($lastname)
     {
@@ -156,27 +138,13 @@ class User extends BaseUser
     }
 
     /**
+     * Get lastname
+     *
      * @return string 
      */
     public function getLastname()
     {
         return $this->lastname;
-    }
-
-    /**
-     * @return string
-     */
-    public function getFullname()
-    {
-        return $this->firstname . ' ' . $this->lastname;
-    }
-
-    /**
-     * @return string
-     */
-    public function getFullnameAndUsername()
-    {
-        return $this->firstname . ' ' . $this->getLastname() . ' (' . $this->getUsername() . ')';
     }
 
     /**
@@ -256,88 +224,31 @@ class User extends BaseUser
     }
 
     /**
-     * @param string $work
-     * @return $this
-     */
-    public function setWork($work)
-    {
-        $this->work = $work;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getWork()
-    {
-        return $this->work;
-    }
-
-    /**
-     * @param string $hobbies
-     * @return $this
-     */
-    public function setHobbies($hobbies)
-    {
-        $this->hobbies = $hobbies;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getHobbies()
-    {
-        return $this->hobbies;
-    }
-
-    /**
-     * @param string $personalDescription
-     * @return $this
-     */
-    public function setPersonalDescription($personalDescription)
-    {
-        $this->personalDescription = $personalDescription;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getPersonalDescription()
-    {
-        return $this->personalDescription;
-    }
-
-    /**
      * @return ArrayCollection
      */
-    public function getShops()
+    public function getOrders()
     {
-        return $this->shops;
+        return $this->orders;
     }
 
     /**
-     * @param Shop $shop
+     * @param Order $order
      * @return $this
      */
-    public function addShop(Shop $shop)
+    public function addOrder(Order $order)
     {
-        $this->shops->add($shop);
+        $this->orders->add($order);
 
         return $this;
     }
 
     /**
-     * @param Shop $shop
+     * @param Order $order
      * @return $this
      */
-    public function removeShop(Shop $shop)
+    public function removeOrder(Order $order)
     {
-        $this->shops->removeElement($shop);
+        $this->orders->removeElement($order);
 
         return $this;
     }

@@ -1,0 +1,44 @@
+{% extends '::base.html.twig' %}
+
+{% block content -%}
+    <h1>Order</h1>
+
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Createdat</th>
+                <td>{{ entity.createdAt|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Duedate</th>
+                <td>{{ entity.dueDate|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Itemsno</th>
+                <td>{{ entity.itemsNo }}</td>
+            </tr>
+            <tr>
+                <th>Totalprice</th>
+                <td>{{ entity.totalPrice }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('order') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('order_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

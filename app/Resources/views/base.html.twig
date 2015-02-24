@@ -49,6 +49,26 @@
                                         Home
                                     </a>
                                 </li>
+                                <li class="{{ route ==  'shop' ? 'active' }}">
+                                    <a href="{{ path('shop') }}">
+                                        Shops
+                                    </a>
+                                </li>
+                                <li class="{{ route ==  'product' ? 'active' }}">
+                                    <a href="{{ path('product') }}">
+                                        Products
+                                    </a>
+                                </li>
+                                <li class="{{ route ==  'customer' ? 'active' }}">
+                                    <a href="{{ path('customer') }}">
+                                        Customers
+                                    </a>
+                                </li>
+                                <li class="{{ route ==  'order' ? 'active' }}">
+                                    <a href="{{ path('order') }}">
+                                        Orders
+                                    </a>
+                                </li>
                             </ul>
                             <ul class="nav navbar-nav navbar-right">
                                 <li class="dropdown {{ 'fos_user' in route ? 'active' }}">
