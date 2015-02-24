@@ -3,6 +3,7 @@ imports:
     - { resource: security.yml }
     - { resource: services.yml }
     - { resource: bundles/fos_user.yml }
+    - { resource: bundles/jms_serializer.yml }
 
 framework:
     #esi:             ~

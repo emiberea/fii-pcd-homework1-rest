@@ -5,13 +5,14 @@ namespace EB\UserBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use FOS\UserBundle\Model\User as BaseUser;
-//use JMS\Serializer\Annotation as JmsSerializer;
+use JMS\Serializer\Annotation as JmsSerializer;
 
 /**
  * User
  *
  * @ORM\Table(name="eb_user")
  * @ORM\Entity(repositoryClass="EB\UserBundle\Repository\UserRepository")
+ * @JmsSerializer\ExclusionPolicy("all")
  */
 class User extends BaseUser
 {
@@ -21,6 +22,7 @@ class User extends BaseUser
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @JmsSerializer\Expose
      */
     protected $id;
 
@@ -28,6 +30,7 @@ class User extends BaseUser
      * @var string
      *
      * @ORM\Column(name="firstname", type="string", length=255)
+     * @JmsSerializer\Expose
      */
     private $firstname;
 
@@ -35,6 +38,7 @@ class User extends BaseUser
      * @var string
      *
      * @ORM\Column(name="lastname", type="string", length=255)
+     * @JmsSerializer\Expose
      */
     private $lastname;
 
@@ -42,6 +46,7 @@ class User extends BaseUser
      * @var string
      *
      * @ORM\Column(name="city", type="string", length=255, nullable=true)
+     * @JmsSerializer\Expose
      */
     private $city;
 
@@ -49,6 +54,7 @@ class User extends BaseUser
      * @var string
      *
      * @ORM\Column(name="address", type="string", length=255, nullable=true)
+     * @JmsSerializer\Expose
      */
     private $address;
 
@@ -56,6 +62,7 @@ class User extends BaseUser
      * @var string
      *
      * @ORM\Column(name="phone", type="string", length=255, nullable=true)
+     * @JmsSerializer\Expose
      */
     private $phone;
 

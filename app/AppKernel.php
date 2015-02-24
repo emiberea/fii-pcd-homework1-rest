@@ -20,6 +20,7 @@ class AppKernel extends Kernel
 
             // third-party bundles
             new FOS\UserBundle\FOSUserBundle(),
+            new JMS\SerializerBundle\JMSSerializerBundle(),
 
             // application bundles
             new EB\ApiBundle\EBApiBundle(),
