@@ -2,6 +2,7 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: services.yml }
+    - { resource: bundles/fos_rest.yml }
     - { resource: bundles/fos_user.yml }
     - { resource: bundles/jms_serializer.yml }
 
