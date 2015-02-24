@@ -1,0 +1,24 @@
+# FOSUserBundle Configuration
+fos_user:
+    db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
+    firewall_name: main
+    user_class: EB\UserBundle\Entity\User
+    from_email:
+        address:        noreply@pcd.fii.com
+        sender_name:    RestPcdFii - No Reply
+    registration:
+        confirmation:
+            enabled: true
+            from_email:
+                address:        registration@pcd.fii.com
+                sender_name:    RestPcdFii - Registration
+        form:
+            type: eb_user_registration
+    resetting:
+        email:
+            from_email:
+                address:        resetting@pcd.fii.com
+                sender_name:    RestPcdFii - Resetting
+    profile:
+        form:
+            type: eb_user_profile

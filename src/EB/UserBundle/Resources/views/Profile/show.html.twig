@@ -1,0 +1,17 @@
+{% extends "EBUserBundle::layout.html.twig" %}
+
+{% block fos_user_content %}
+    <div class="row">
+        <div class="col-md-3">
+            <h3>{{ user.firstname }} {{ user.lastname }}</h3>
+            <h5>
+                {#<a href="{{ path('eb_user_public_profile', {'username': user.username}) }}">#}
+                    {#{{ user.username }}#}
+                {#</a>#}
+            </h5>
+        </div>
+        <div class="col-md-5">
+            {% include "EBUserBundle:Profile:show_content.html.twig" %}
+        </div>
+    </div>
+{% endblock fos_user_content %}

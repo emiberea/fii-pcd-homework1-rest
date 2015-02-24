@@ -12,3 +12,7 @@ eb_user:
     resource: "@EBUserBundle/Controller/"
     type:     annotation
     prefix:   /
+
+# FOSUserBundle routes
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
