@@ -28,7 +28,7 @@ class Customer
     /**
      * @var string
      *
-     * @ORM\Column(name="firstname", type="string", length=255)
+     * @ORM\Column(name="firstname", type="string", length=255, nullable=true)
      * @JmsSerializer\Expose
      */
     private $firstname;
@@ -36,7 +36,7 @@ class Customer
     /**
      * @var string
      *
-     * @ORM\Column(name="lastname", type="string", length=255)
+     * @ORM\Column(name="lastname", type="string", length=255, nullable=true)
      * @JmsSerializer\Expose
      */
     private $lastname;
@@ -69,13 +69,14 @@ class Customer
      * @var \DateTime
      *
      * @ORM\Column(name="birth_date", type="date", nullable=true)
+     * @JmsSerializer\Expose
      */
     private $birthDate;
 
     /**
      * @var ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="Order", mappedBy="customer")
+     * @ORM\OneToMany(targetEntity="Order", mappedBy="customer", cascade={"persist", "remove"})
      */
     private $orders;
 

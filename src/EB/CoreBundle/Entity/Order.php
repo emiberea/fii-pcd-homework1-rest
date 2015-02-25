@@ -25,28 +25,28 @@ class Order
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="created_at", type="date")
+     * @ORM\Column(name="created_at", type="date", nullable=true)
      */
     private $createdAt;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="due_date", type="date")
+     * @ORM\Column(name="due_date", type="date", nullable=true)
      */
     private $dueDate;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="items_no", type="integer")
+     * @ORM\Column(name="items_no", type="integer", nullable=true)
      */
     private $itemsNo;
 
     /**
      * @var float
      *
-     * @ORM\Column(name="total_price", type="decimal", precision=10, scale=2)
+     * @ORM\Column(name="total_price", type="decimal", precision=10, scale=2, nullable=true)
      */
     private $totalPrice;
 

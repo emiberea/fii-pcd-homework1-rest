@@ -2,6 +2,7 @@
 
 namespace EB\CoreBundle\Entity;
 
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use EB\UserBundle\Entity\User;
@@ -11,6 +12,7 @@ use EB\UserBundle\Entity\User;
  *
  * @ORM\Table(name="shops")
  * @ORM\Entity(repositoryClass="EB\CoreBundle\Repository\ShopRepository")
+ * @UniqueEntity("name")
  */
 class Shop
 {
@@ -26,7 +28,7 @@ class Shop
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=255)
+     * @ORM\Column(name="name", type="string", length=255, nullable=true)
      */
     private $name;
 
@@ -54,7 +56,7 @@ class Shop
     /**
      * @var ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="Product", mappedBy="shop")
+     * @ORM\OneToMany(targetEntity="Product", mappedBy="shop", cascade={"persist", "remove"})
      */
     private $products;
 
