@@ -56,6 +56,22 @@ class ShopController extends Controller
                 'href' => $this->get('router')->generate('eb_api_shop_get', array('id' => $id)),
             ),
             1 => array(
+                'rel' => '/linkrels/shop/create',
+                'href' => $this->get('router')->generate('eb_api_shop_create'),
+            ),
+            2 => array(
+                'rel' => '/linkrels/shop/update',
+                'href' => $this->get('router')->generate('eb_api_shop_update', array('id' => $id)),
+            ),
+            3 => array(
+                'rel' => '/linkrels/shop/update-address',
+                'href' => $this->get('router')->generate('eb_api_shop_update_address', array('id' => $id)),
+            ),
+            4 => array(
+                'rel' => '/linkrels/shop/delete',
+                'href' => $this->get('router')->generate('eb_api_shop_delete', array('id' => $id)),
+            ),
+            5 => array(
                 'rel' => '/linkrels/shops',
                 'href' => $this->get('router')->generate('eb_api_shop_getAll'),
             ),
@@ -111,11 +127,40 @@ class ShopController extends Controller
         $em->persist($shop);
         $em->flush();
 
+        $links = array(
+            0 => array(
+                'rel' => '/linkrels/shop',
+                'href' => $this->get('router')->generate('eb_api_shop_get', array('id' => $shop->getId())),
+            ),
+            1 => array(
+                'rel' => 'self',
+                'href' => $this->get('router')->generate('eb_api_shop_create'),
+            ),
+            2 => array(
+                'rel' => '/linkrels/shop/update',
+                'href' => $this->get('router')->generate('eb_api_shop_update', array('id' => $shop->getId())),
+            ),
+            3 => array(
+                'rel' => '/linkrels/shop/update-address',
+                'href' => $this->get('router')->generate('eb_api_shop_update_address', array('id' => $shop->getId())),
+            ),
+            4 => array(
+                'rel' => '/linkrels/shop/delete',
+                'href' => $this->get('router')->generate('eb_api_shop_delete', array('id' => $shop->getId())),
+            ),
+            5 => array(
+                'rel' => '/linkrels/shops',
+                'href' => $this->get('router')->generate('eb_api_shop_getAll'),
+            ),
+        );
+
         $view->setStatusCode(201); // 201 Created
         $view->setHeader(
             'Location',
             $this->get('router')->generate('eb_api_shop_get', array('id' => $shop->getId()))
         );
+        $view->setData(array('links' => $links));
+        $view->setFormat('json');
 
         return $view;
     }
@@ -156,7 +201,36 @@ class ShopController extends Controller
         $em->persist($shop);
         $em->flush();
 
-        $view->setStatusCode(204); // 204 No Content
+        $links = array(
+            0 => array(
+                'rel' => '/linkrels/shop',
+                'href' => $this->get('router')->generate('eb_api_shop_get', array('id' => $shop->getId())),
+            ),
+            1 => array(
+                'rel' => '/linkrels/shop/create',
+                'href' => $this->get('router')->generate('eb_api_shop_create'),
+            ),
+            2 => array(
+                'rel' => 'self',
+                'href' => $this->get('router')->generate('eb_api_shop_update', array('id' => $shop->getId())),
+            ),
+            3 => array(
+                'rel' => '/linkrels/shop/update-address',
+                'href' => $this->get('router')->generate('eb_api_shop_update_address', array('id' => $shop->getId())),
+            ),
+            4 => array(
+                'rel' => '/linkrels/shop/delete',
+                'href' => $this->get('router')->generate('eb_api_shop_delete', array('id' => $shop->getId())),
+            ),
+            5 => array(
+                'rel' => '/linkrels/shops',
+                'href' => $this->get('router')->generate('eb_api_shop_getAll'),
+            ),
+        );
+
+        $view->setStatusCode(200); // 200 OK
+        $view->setData(array('links' => $links));
+        $view->setFormat('json');
 
         return $view;
     }
@@ -190,7 +264,36 @@ class ShopController extends Controller
         $em->persist($shop);
         $em->flush();
 
-        $view->setStatusCode(204); // 204 No Content
+        $links = array(
+            0 => array(
+                'rel' => '/linkrels/shop',
+                'href' => $this->get('router')->generate('eb_api_shop_get', array('id' => $shop->getId())),
+            ),
+            1 => array(
+                'rel' => '/linkrels/shop/create',
+                'href' => $this->get('router')->generate('eb_api_shop_create'),
+            ),
+            2 => array(
+                'rel' => '/linkrels/shop/update',
+                'href' => $this->get('router')->generate('eb_api_shop_update', array('id' => $shop->getId())),
+            ),
+            3 => array(
+                'rel' => 'self',
+                'href' => $this->get('router')->generate('eb_api_shop_update_address', array('id' => $shop->getId())),
+            ),
+            4 => array(
+                'rel' => '/linkrels/shop/delete',
+                'href' => $this->get('router')->generate('eb_api_shop_delete', array('id' => $shop->getId())),
+            ),
+            5 => array(
+                'rel' => '/linkrels/shops',
+                'href' => $this->get('router')->generate('eb_api_shop_getAll'),
+            ),
+        );
+
+        $view->setStatusCode(200); // 200 OK
+        $view->setData(array('links' => $links));
+        $view->setFormat('json');
 
         return $view;
     }
@@ -214,7 +317,16 @@ class ShopController extends Controller
         $em->remove($shop);
         $em->flush();
 
-        $view->setStatusCode(204); // 204 No Content
+        $links = array(
+            0 => array(
+                'rel' => '/linkrels/shops',
+                'href' => $this->get('router')->generate('eb_api_shop_getAll'),
+            ),
+        );
+
+        $view->setStatusCode(200); // 200 OK
+        $view->setData(array('links' => $links));
+        $view->setFormat('json');
 
         return $view;
     }

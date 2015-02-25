@@ -6,6 +6,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use EB\UserBundle\Entity\User;
+use JMS\Serializer\Annotation as JmsSerializer;
 
 /**
  * Shop
@@ -57,6 +58,7 @@ class Shop
      * @var ArrayCollection
      *
      * @ORM\OneToMany(targetEntity="Product", mappedBy="shop", cascade={"persist", "remove"})
+     * @JmsSerializer\MaxDepth(1)
      */
     private $products;
 
