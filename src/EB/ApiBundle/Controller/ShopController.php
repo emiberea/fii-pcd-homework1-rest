@@ -166,7 +166,7 @@ class ShopController extends Controller
     }
 
     /**
-     * @Route("/shop/{id}/update", name="eb_api_shop_update")
+     * @Route("/shop/{id}", name="eb_api_shop_update")
      * @Method("PUT")
      */
     public function updateShopAction(Request $request, $id)
@@ -190,7 +190,7 @@ class ShopController extends Controller
 
         $user = $em->getRepository('EBUserBundle:User')->find($params['userId']);
         if (!$user) {
-            $view->setStatusCode(404);
+            $view->setStatusCode(400); // 400 Bad Request
             return $view;
         }
         $shop->setName($params['name']);

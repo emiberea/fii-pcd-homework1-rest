@@ -108,7 +108,7 @@ class CustomerController extends Controller
     }
 
     /**
-     * @Route("/customer/{id}/update", name="eb_api_customer_update")
+     * @Route("/customer/{id}", name="eb_api_customer_update")
      * @Method("PUT")
      */
     public function updateCustomerAction(Request $request, $id)
